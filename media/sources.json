@@ -1,0 +1,33 @@
+{
+  "frames": [
+    {"id": "jimo-14",   "video": "jimo-huafang-video/build/寂寞花芳.mp4", "t": 14,  "aspect": 1, "focus": [0.5, 0.5]},
+    {"id": "cyber-1",   "video": "实习/作品/赛博朋克电影/*.mp4",           "t": 1,   "aspect": 1, "focus": [0.45, 0.5]},
+    {"id": "dog-13",    "video": "实习/作品/线条小狗/*7186.mp4",           "t": 13,  "aspect": 1, "focus": [0.5, 0.62]},
+    {"id": "sher-36",   "video": "MoCoCo/docs/assets/sherlock-jr-recap.mp4", "t": 36, "aspect": 1, "focus": [0.5, 0.4]},
+    {"id": "jimo-98",   "video": "jimo-huafang-video/build/寂寞花芳.mp4", "t": 98,  "aspect": 1, "focus": [0.62, 0.5]},
+    {"id": "ootd-3",    "video": "实习/作品/穿搭视频/*.mp4",               "t": 3,   "aspect": 1, "focus": [0.3, 0.4]},
+    {"id": "cyber-12",  "video": "实习/作品/赛博朋克电影/*.mp4",           "t": 12,  "aspect": 1, "focus": [0.62, 0.5]},
+    {"id": "jimo-126",  "video": "jimo-huafang-video/build/寂寞花芳.mp4", "t": 126, "aspect": 1, "focus": [0.3, 0.5]},
+    {"id": "sher-72",   "video": "MoCoCo/docs/assets/sherlock-jr-recap.mp4", "t": 72, "aspect": 1, "focus": [0.5, 0.4]},
+    {"id": "dog-28",    "video": "实习/作品/线条小狗/*7186.mp4",           "t": 28,  "aspect": 1, "focus": [0.5, 0.6]},
+    {"id": "ootd-9",    "video": "实习/作品/穿搭视频/*.mp4",               "t": 9,   "aspect": 1, "focus": [0.5, 0.4]},
+    {"id": "cyber-5",   "video": "实习/作品/赛博朋克电影/*.mp4",           "t": 5,   "aspect": 1, "focus": [0.4, 0.5]},
+    {"id": "jimo-182",  "video": "jimo-huafang-video/build/寂寞花芳.mp4", "t": 182, "aspect": 1, "focus": [0.5, 0.5]},
+    {"id": "sher-156",  "video": "MoCoCo/docs/assets/sherlock-jr-recap.mp4", "t": 156, "aspect": 1, "focus": [0.5, 0.4]},
+
+    {"id": "cyber-wide", "video": "实习/作品/赛博朋克电影/*.mp4", "t": 2.5, "aspect": 1.7778, "focus": [0.5, 0.5], "width": 520},
+    {"id": "mococo-a", "video": "MoCoCo/docs/assets/sherlock-jr-recap.mp4", "t": 1,  "aspect": 1.3333, "focus": [0.5, 0.5], "width": 240},
+    {"id": "mococo-b", "video": "MoCoCo/docs/assets/sherlock-jr-recap.mp4", "t": 60, "aspect": 1.3333, "focus": [0.5, 0.5], "width": 240},
+    {"id": "mococo-c", "video": "MoCoCo/docs/assets/sherlock-jr-recap.mp4", "t": 84, "aspect": 1.3333, "focus": [0.5, 0.5], "width": 240},
+    {"id": "ai-dog",   "video": "实习/作品/线条小狗/*7186.mp4",  "t": 24, "aspect": 0.75, "focus": [0.5, 0.6], "width": 180},
+    {"id": "ai-ootd",  "video": "实习/作品/穿搭视频/*.mp4",      "t": 6,  "aspect": 0.75, "focus": [0.5, 0.5], "width": 180},
+    {"id": "ai-cyber", "video": "实习/作品/赛博朋克电影/*.mp4",  "t": 3,  "aspect": 0.75, "focus": [0.55, 0.5], "width": 180}
+  ],
+  "barcodes": [
+    {"id": "jimo", "video": "jimo-huafang-video/build/寂寞花芳.mp4", "slices": 360}
+  ],
+  "stills": [
+    {"id": "jimo-scroll", "image": "jimo-huafang-video/build/scroll.png", "height": 150},
+    {"id": "inkmuse-card", "image": "InkMuse/docs/studio.png", "box": [744, 404, 1102, 866], "height": 300}
+  ]
+}

@@ -25,6 +25,7 @@ DIM = "#4a4750"
 CYAN = "#7ee0d2"
 AMBER = "#f2a65a"
 LIME = "#d2e679"
+CREAM = "#d8cdb8"
 
 BASE_CSS = """
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
@@ -254,45 +255,53 @@ def hero(m: Media, f: Fonts) -> str:
 
 # ------------------------------------------------------------------ section headers
 
-def section(index: str, zh: str, en: str, color: str, motif: str, m: Media, f: Fonts) -> str:
-    W, H = 1200, 150
+def section(zh: str, en: str, color: str, motif: str, m: Media, f: Fonts) -> str:
+    W, H = 1200, 130
     css = """
 .mv { animation: drift 30s linear infinite; }
 @keyframes drift { to { transform: translateX(-600px); } }
 .wv rect { animation: wave 1.6s ease-in-out infinite alternate; }
 @keyframes wave { from { transform: scaleY(.1); } to { transform: scaleY(1); } }
+.sweep { animation: sweep 6s cubic-bezier(.6,0,.2,1) infinite; }
+@keyframes sweep { from { transform: translateX(0); } to { transform: translateX(530px); } }
+.lit { animation: lit 6s infinite; opacity: .25; }
+@keyframes lit { 0% { opacity: .25; } 8%,70% { opacity: 1; } 100% { opacity: .25; } }
 """
     body = f'<rect width="{W}" height="{H}" rx="16" fill="{BG}"/>'
-    body += text(f.italic, index, 96, 30, 112, color, extra='opacity=".9"')
-    body += text(f.serif_cjk, zh, 40, 150, 86, INK, tracking=6)
-    body += text(f.mono, en, 11.5, 152, 116, MUTED, tracking=2)
-    body += f'<clipPath id="m"><rect x="640" y="40" width="530" height="70" rx="6"/></clipPath>'
+    body += text(f.serif_cjk, zh, 40, 40, 72, INK, tracking=6)
+    body += text(f.mono, en, 11.5, 42, 102, color, tracking=2)
+    body += f'<clipPath id="m"><rect x="640" y="30" width="530" height="70" rx="6"/></clipPath>'
     if motif == "barcode":
         bar = m.data["barcodes"]["jimo"]
         unit = 600 / len(bar)
-        stripes = "".join(f'<rect x="{640 + i * unit:.2f}" y="40" width="{unit + 0.3:.2f}" height="70" fill="{c}"/>'
+        stripes = "".join(f'<rect x="{640 + i * unit:.2f}" y="30" width="{unit + 0.3:.2f}" height="70" fill="{c}"/>'
                           for i, c in enumerate(bar + bar))
         body += (f'<g clip-path="url(#m)"><g class="mv">{stripes}</g>'
-                 f'<rect x="640" y="40" width="530" height="70" fill="{BG}" opacity=".25"/></g>')
-        body += text(f.sans_cjk, "《寂寞花芳》全片", 10, 1170, 128, DIM, "end")
-        body += text(f.mono, "FULL-FILM BARCODE", 9.5, 1170 - f.sans_cjk.width("《寂寞花芳》全片", 10) - 10,
-                     128, DIM, "end", 1.5)
-    else:
+                 f'<rect x="640" y="30" width="530" height="70" fill="{BG}" opacity=".25"/></g>')
+    elif motif == "wave":
         rng = np.random.default_rng(3)
         bars = "".join(
-            f'<rect class="fb" x="{646 + i * 9}" y="45" width="4" height="60" rx="2" fill="{color}" '
+            f'<rect class="fb" x="{646 + i * 9}" y="35" width="4" height="60" rx="2" fill="{color}" '
             f'style="animation-delay:-{rng.uniform(0, 1.6):.2f}s;opacity:{0.35 + 0.65 * math.sin(math.pi * i / 58):.2f}"/>'
             for i in range(59))
         body += f'<g class="wv">{bars}</g>'
-        body += text(f.mono, "VOICE, IMAGE, TASTE", 9.5, 1170, 128, DIM, "end", 1.5)
-    return doc(W, H, f"{index} {zh}", css, body)
+    else:
+        # dominant colours of the hero frames light up as a scan line passes them
+        keys = [k for k in m.data["frames"] if k.split("-")[0] in WORKS and k.split("-")[1].isdigit()]
+        step = 530 / len(keys)
+        for i, k in enumerate(keys):
+            c = m.frame(k)["palette"][0]["hex"]
+            body += (f'<rect class="lit" x="{640 + i * step + 3:.1f}" y="40" width="{step - 6:.1f}" height="50" rx="3" '
+                     f'fill="{c}" style="animation-delay:{i * 6 / len(keys) * .55:.2f}s"/>')
+        body += f'<g class="sweep"><rect x="640" y="30" width="2" height="70" fill="{color}"/></g>'
+    return doc(W, H, zh, css, body)
 
 
 # ------------------------------------------------------------------ measure cards
 
 def card_color(m: Media, f: Fonts) -> str:
     W, H = 600, 440
-    back, front = card_frame(W, H, CYAN, "MEASURE / 01  COLOUR", "赛博朋克动画色彩研究",
+    back, front = card_frame(W, H, CREAM, "PAPER  /  COLOUR ANALYSIS", "赛博朋克动画色彩研究",
                              ["中日美三国作品的明度、饱和度与色相比较", "第一作者 · 《电影评介》（中文核心）"],
                              "MOVIE BARCODE  /  K-MEANS  /  HSV", f)
     key = "cyber-wide"
@@ -349,7 +358,7 @@ def card_color(m: Media, f: Fonts) -> str:
 
 def card_boxoffice(m: Media, f: Fonts) -> str:
     W, H = 600, 440
-    back, front = card_frame(W, H, CYAN, "MEASURE / 02  BOX OFFICE", "喜剧电影票房影响因素研究",
+    back, front = card_frame(W, H, CREAM, "PAPER  /  BOX OFFICE DATA", "喜剧电影票房影响因素研究",
                              ["931 部喜剧电影：导演产出与类型融合显著预测票房", "独立作者 · 《喜剧世界》"],
                              "TF-IDF  /  PEARSON  /  MULTIPLE REGRESSION", f)
     rng = np.random.default_rng(931)
@@ -378,7 +387,7 @@ def card_boxoffice(m: Media, f: Fonts) -> str:
 
 def card_jia(m: Media, f: Fonts) -> str:
     W, H = 600, 440
-    back, front = card_frame(W, H, CYAN, "MEASURE / 03  SUBTITLES", "贾樟柯地缘电影的文化研究",
+    back, front = card_frame(W, H, CREAM, "PAPER  /  SUBTITLE MINING", "贾樟柯地缘电影的文化研究",
                              ["6 部电影字幕的主题与情绪变化 · 数字人文视角", "第二届“地缘杯”中国电影青年学者优秀论文奖 三等奖"],
                              "JIEBA  /  SNOWNLP  /  LDA", f)
     rng = np.random.default_rng(6)
@@ -413,7 +422,7 @@ def card_jia(m: Media, f: Fonts) -> str:
 
 def card_nexthook(m: Media, f: Fonts) -> str:
     W, H = 600, 440
-    back, front = card_frame(W, H, CYAN, "MEASURE / 04  PRODUCT", "NextHook",
+    back, front = card_frame(W, H, CYAN, "PROJECT  /  CREATOR ANALYTICS", "NextHook",
                              ["帮创作者从过去的内容数据里，找到下一条该试什么", "基于 Microsoft Data Formulator 改造的产品原型"],
                              "CREATOR ANALYTICS  /  SERIES COMPARISON  /  AI AGENT", f)
     rng = np.random.default_rng(12)
@@ -453,7 +462,7 @@ def card_nexthook(m: Media, f: Fonts) -> str:
 
 def card_mococo(m: Media, f: Fonts) -> str:
     W, H = 600, 440
-    back, front = card_frame(W, H, AMBER, "UNDERSTAND / 01  CO-CREATION", "MoCoCo",
+    back, front = card_frame(W, H, CYAN, "PROJECT  /  HCI RESEARCH PROTOTYPE", "MoCoCo",
                              ["人机共创电影解说：写下解说稿，系统找出匹配的镜头", "UCL 人机交互研究项目 · 提出四条设计准则 · 可在线试用"],
                              "SCRIPT  >  SHOT RETRIEVAL  >  ROUGH CUT  >  VOICE", f)
     lines = ["别人看电影，他直接钻进银幕！", "想找出真相，谁知一路跟到火车旁。", "他的位置没动，布景却不停换。"]
@@ -509,7 +518,7 @@ def land_path(geojson: Path, x0: float, y0: float, scale: float, lat_top: float,
 def card_cineatlas(m: Media, f: Fonts, geojson: Path, destinations: Path) -> str:
     W, H = 600, 440
     dests = json.loads(destinations.read_text())
-    back, front = card_frame(W, H, LIME, "UNDERSTAND / 02  CULTURE", "映游 CineAtlas",
+    back, front = card_frame(W, H, CYAN, "PROJECT  /  FILM CULTURE MAP", "映游 CineAtlas",
                              ["跟着电影，走进一个地方：给旅行者的电影文化地图",
                               f"{len(dests)} 个目的地 · 按地点与年代探索电影里的日常与文化"],
                              "MAP  /  TIMELINE  /  CULTURE THROUGH CINEMA", f)
@@ -540,7 +549,7 @@ def card_cineatlas(m: Media, f: Fonts, geojson: Path, destinations: Path) -> str
 
 def card_inkmuse(m: Media, f: Fonts) -> str:
     W, H = 600, 440
-    back, front = card_frame(W, H, AMBER, "UNDERSTAND / 03  WRITING", "InkMuse",
+    back, front = card_frame(W, H, CYAN, "PROJECT  /  VISUAL WRITING STUDIO", "InkMuse",
                              ["写好的文字，自动排成好看的图文卡片", "按内容决定配色、版式与配图 · 网页与微信小程序"],
                              "CONTENT-AWARE LAYOUT  /  IMAGE SEARCH  /  MINI PROGRAM", f)
     still = m.frame("inkmuse-card")
@@ -580,27 +589,73 @@ def card_inkmuse(m: Media, f: Fonts) -> str:
 
 
 def card_aiworks(m: Media, f: Fonts) -> str:
-    W, H = 600, 440
-    back, front = card_frame(W, H, AMBER, "UNDERSTAND / 04  AI VIDEO", "AI 视听作品",
-                             ["3D 盲盒动画、秋日穿搭短片、赛博朋克一镜到底", "即梦 / ChatGPT 生图 · 从分镜、提示词到成片全程记录"],
-                             "STORYBOARD  /  PROMPT  /  AI VIDEO", f)
+    W, H = 1200, 330
     css = """
 .kb { animation: kb 12s ease-in-out infinite alternate; }
 @keyframes kb { from { transform: scale(1); } to { transform: scale(1.12); } }
-.cap { animation: cap 12s infinite; }
+.step { animation: step 6s infinite; opacity: .3; }
+@keyframes step { 0% { opacity: .3; } 6%,30% { opacity: 1; } 36%,100% { opacity: .3; } }
 """
-    body = back
-    names = [("ai-dog", "晒被子吃西瓜"), ("ai-ootd", "秋日穿搭"), ("ai-cyber", "高空馄饨摊")]
-    for i, (key, name) in enumerate(names):
-        x, y, w, h = 30 + i * 184, 46, 172, 222
+    body = (f'<rect width="{W}" height="{H}" rx="16" fill="{PANEL}"/>'
+            f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="15.5" fill="none" stroke="{LINE}"/>')
+    body += text(f.mono, "VIDEO  /  AI-GENERATED", 11, 30, 30, AMBER, tracking=1.5)
+    names = [("ai-dog", "晒被子吃西瓜", "3D 盲盒动画"), ("ai-ootd", "秋日穿搭", "竖屏穿搭短片"),
+             ("ai-cyber", "高空馄饨摊", "赛博朋克长镜头")]
+    for i, (key, name, kind) in enumerate(names):
+        x, y, w, h = 30 + i * 176, 46, 164, 254
         body += (f'<clipPath id="c{i}"><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6"/></clipPath>'
                  f'<g clip-path="url(#c{i})"><image class="kb" x="{x}" y="{y}" width="{w}" height="{h}" '
                  f'preserveAspectRatio="xMidYMid slice" xlink:href="{m.uri(key)}" '
                  f'style="transform-origin:{x + w / 2}px {y + h / 2}px;animation-delay:-{i * 4}s"/>'
-                 f'<rect x="{x}" y="{y + h - 34}" width="{w}" height="34" fill="#000" opacity=".45"/></g>')
-        body += text(f.sans_cjk, name, 12, x + 10, y + h - 12, INK)
-    body += front
+                 f'<rect x="{x}" y="{y + h - 48}" width="{w}" height="48" fill="#000" opacity=".5"/></g>')
+        body += text(f.sans_cjk, name, 13, x + 10, y + h - 26, INK)
+        body += text(f.sans_cjk, kind, 10.5, x + 10, y + h - 10, "#b8b1a6")
+    tx = 600
+    body += text(f.serif_cjk, "AI 视频作品", 30, tx, 120, INK)
+    body += text(f.sans_cjk, "用 AI 工具完成的三支短片：3D 盲盒动画、秋日穿搭、赛博朋克一镜到底。", 14.5, tx, 156, "#c9c3ba")
+    body += text(f.sans_cjk, "每支都从需求、故事板、素材清单写到提示词，再生成、修正成片。", 14.5, tx, 180, MUTED)
+    steps = ["需求", "故事板", "提示词", "成片"]
+    sx = tx
+    for i, st in enumerate(steps):
+        w = f.sans_cjk.width(st, 13) + 24
+        body += (f'<g class="step" style="animation-delay:{i * 1.5}s"><rect x="{sx}" y="210" width="{w:.0f}" height="30" rx="15" '
+                 f'fill="none" stroke="{AMBER}"/>' + text(f.sans_cjk, st, 13, sx + 12, 230, INK) + "</g>")
+        sx += w + (26 if i < len(steps) - 1 else 0)
+        if i < len(steps) - 1:
+            body += text(f.mono, ">", 12, sx - 17, 229, DIM)
+    body += text(f.mono, "JIMENG  /  CHATGPT IMAGES  /  STORYBOARD  /  PROMPT", 10.5, tx, 300, DIM, tracking=1.2)
     return doc(W, H, "AI video works", css, body)
+
+
+def card_microdrama(m: Media, f: Fonts) -> str:
+    W, H = 600, 440
+    back, front = card_frame(W, H, CREAM, "FUNDED STUDY  /  MICRO-DRAMA INDUSTRY", "西安“微短剧+”业态研究",
+                             ["新质生产力赋能西安“微短剧+”业态创新发展路径研究", "西安市社会科学规划基金课题 · 主要参与人 · 2025 年 12 月结项"],
+                             "INDUSTRY RESEARCH  /  CASE ANALYSIS  /  POLICY", f)
+    css = """
+.feed { animation: feed 10s cubic-bezier(.7,0,.2,1) infinite; }
+@keyframes feed { 0%,20% { transform: translateY(0); } 25%,45% { transform: translateY(-160px); }
+  50%,70% { transform: translateY(-320px); } 75%,95% { transform: translateY(-480px); } 100% { transform: translateY(-640px); } }
+.prog { animation: prog 2.5s linear infinite; transform-origin: 0 0; }
+@keyframes prog { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+"""
+    body = back
+    tones = ["#3a2b2b", "#2b3340", "#3d3427", "#2a3a33", "#352a3b"]
+    for col in range(4):
+        x = 52 + col * 134
+        cells = ""
+        for r in range(5):
+            y = 46 + r * 160
+            ep = (col * 5 + r) % 24 + 1
+            cells += (f'<rect x="{x}" y="{y}" width="96" height="150" rx="10" fill="{tones[(col + r) % 5]}"/>'
+                      + text(f.mono, f"EP {ep:02d}", 10, x + 10, y + 22, INK, tracking=1)
+                      + f'<rect x="{x + 10}" y="{y + 132}" width="76" height="3" rx="1.5" fill="#ffffff" opacity=".2"/>'
+                      + f'<rect class="prog" x="{x + 10}" y="{y + 132}" width="76" height="3" rx="1.5" fill="{AMBER}" '
+                        f'style="transform-origin:{x + 10}px 0"/>')
+        body += (f'<clipPath id="col{col}"><rect x="{x}" y="46" width="96" height="230" rx="10"/></clipPath>'
+                 f'<g clip-path="url(#col{col})"><g class="feed" style="animation-delay:-{col * 1.2:.1f}s">{cells}</g></g>')
+    body += front
+    return doc(W, H, "Xi'an micro-drama industry study", css, body)
 
 
 def card_jimo(m: Media, f: Fonts) -> str:
@@ -617,7 +672,7 @@ def card_jimo(m: Media, f: Fonts) -> str:
 """
     body = (f'<rect width="{W}" height="{H}" rx="16" fill="{PANEL}"/>'
             f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="15.5" fill="none" stroke="{LINE}"/>')
-    body += text(f.mono, "UNDERSTAND / 05  CODE-PAINTED FILM", 11, 30, 30, AMBER, tracking=1.5)
+    body += text(f.mono, "VIDEO  /  CODE-PAINTED SHORT FILM", 11, 30, 30, AMBER, tracking=1.5)
     body += (f'<clipPath id="win"><rect x="30" y="46" width="{view_w}" height="{sh}" rx="6"/></clipPath>'
              f'<g clip-path="url(#win)"><image class="pan" x="30" y="46" width="{sw}" height="{sh}" '
              f'xlink:href="{m.uri("jimo-scroll")}"/></g>')
@@ -673,17 +728,19 @@ def main() -> None:
     args.out.mkdir(parents=True, exist_ok=True)
     outputs = {
         "hero.svg": hero(m, f),
-        "measure.svg": section("01", "测量内容", "MEASURE CONTENT  /  WITH ALGORITHMS & DATA", CYAN, "barcode", m, f),
-        "understand.svg": section("02", "理解用户", "UNDERSTAND PEOPLE  /  THROUGH SOUND, IMAGE & TASTE", AMBER, "wave", m, f),
-        "color.svg": card_color(m, f),
-        "boxoffice.svg": card_boxoffice(m, f),
-        "jia.svg": card_jia(m, f),
-        "nexthook.svg": card_nexthook(m, f),
+        "projects.svg": section("项目", "PROJECTS  /  4 AI PRODUCT PROTOTYPES", CYAN, "scan", m, f),
+        "videos.svg": section("视频作品", "VIDEOS  /  CODE-PAINTED AND AI-GENERATED", AMBER, "wave", m, f),
+        "research.svg": section("论文与课题", "RESEARCH  /  3 PAPERS AND 1 FUNDED STUDY", CREAM, "barcode", m, f),
         "mococo.svg": card_mococo(m, f),
         "cineatlas.svg": card_cineatlas(m, f, args.land, args.destinations),
         "inkmuse.svg": card_inkmuse(m, f),
-        "aiworks.svg": card_aiworks(m, f),
+        "nexthook.svg": card_nexthook(m, f),
         "jimo.svg": card_jimo(m, f),
+        "aiworks.svg": card_aiworks(m, f),
+        "color.svg": card_color(m, f),
+        "boxoffice.svg": card_boxoffice(m, f),
+        "jia.svg": card_jia(m, f),
+        "microdrama.svg": card_microdrama(m, f),
         "footer.svg": footer(m, f),
     }
     for name, svg in outputs.items():

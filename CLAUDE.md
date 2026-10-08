@@ -1,6 +1,6 @@
 # Baixue-Wu profile
 
-The GitHub profile README of Baixue Wu (the special `Baixue-Wu/Baixue-Wu` repo). The page targets recruiters for AI product / AI content operations roles. Positioning: 以算法与数据测量内容，以视听与审美理解用户. Data and film carry equal weight; film is her background and taste, not the job she is applying for.
+The GitHub profile README of Baixue Wu (the special `Baixue-Wu/Baixue-Wu` repo). The page targets recruiters for AI product / AI content operations roles. Positioning: 以算法与数据测量内容，以视听与审美理解用户. Data and film carry equal weight; film is her background and taste, not the job she is applying for. The slogan shows in visual form only; content is grouped by type (projects, videos, papers) in plain language.
 
 ## Structure
 

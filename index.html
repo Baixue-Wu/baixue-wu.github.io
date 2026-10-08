@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>吴白雪 Baixue Wu</title>
+<meta name="description" content="吴白雪的作品集：AI 产品原型、视频作品与电影数据研究。">
+<meta property="og:title" content="吴白雪 Baixue Wu">
+<meta property="og:description" content="以算法与数据测量内容，以视听与审美理解用户。">
+<meta property="og:image" content="media/video/jimo.jpg">
+<link rel="preload" href="assets/fonts/serif-sc.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/mono.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top">吴白雪 <i>Baixue Wu</i></a>
+  <nav aria-label="页面导航">
+    <a href="#projects">项目</a>
+    <a href="#videos">视频</a>
+    <a href="#research">论文</a>
+    <a href="#contact">联系</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<section class="hero" id="hero" aria-label="首屏：胶片经过扫描线，左侧是画面的色彩数据，右侧是画面本身">
+  <canvas id="reel"></canvas>
+  <p class="facts">DATA SCIENCE BSc &nbsp;/&nbsp; FILM &amp; DRAMA MA &nbsp;/&nbsp; VISITOR @ UCL CS</p>
+  <div class="slogan">
+    <div class="half data">
+      <p class="small">以算法与数据</p>
+      <p class="big"><span>测量内容</span></p>
+      <div class="underline barcode-line" id="sloganBarcode" aria-hidden="true"></div>
+      <p class="en">ALGORITHMS &amp; DATA &gt; CONTENT</p>
+    </div>
+    <div class="half film">
+      <p class="small">以视听与审美</p>
+      <p class="big"><span>理解用户</span></p>
+      <div class="underline wave-line" id="sloganWave" aria-hidden="true"></div>
+      <p class="en">SOUND, IMAGE &amp; TASTE &gt; PEOPLE</p>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <span><i class="lamp"></i>PROJECTING</span>
+    <span class="hint">移动鼠标或手指拖动，扫描线会跟着走</span>
+    <span id="tc">TC 00:00:00</span>
+  </div>
+</section>
+
+<section class="intro">
+  <p>陕西师范大学 戏剧与影视 硕士（2027 届）<span class="sep">·</span>华中农业大学 数据科学与大数据技术 学士</p>
+  <p>2026 年 5 月至 10 月，UCL 计算机系 Visitor（研究访问），参与人机交互方向研究</p>
+  <p class="want">求职意向：<b>AI 产品运营 / AI 内容运营</b> <mark class="todo">【待确认：意向措辞】</mark></p>
+</section>
+
+<section class="block" id="projects">
+  <header class="block-head">
+    <h2>项目</h2>
+    <p class="en">PROJECTS &nbsp;/&nbsp; 4</p>
+    <p class="note">四个 AI 产品原型：电影解说、旅行文化、图文排版和创作者数据复盘。</p>
+  </header>
+  <div class="grid two">
+    <article class="card">
+      <figure class="vis"><img src="assets/cards/mococo.svg" alt="解说稿逐句连到匹配的电影镜头" loading="lazy"></figure>
+      <div class="body">
+        <p class="kicker">人机交互研究原型 · UCL</p>
+        <h3>MoCoCo</h3>
+        <p class="lede">人机共创电影解说</p>
+        <p>创作者写下解说稿，系统在整部电影里找出匹配的镜头，自动生成粗剪、配音和字幕，每一步都能人工修改。</p>
+        <p class="role"><b>我负责</b>研究提案，提出语义与情感对齐、叙事时间结构、知识增强解说、人机迭代共创四条设计准则。<mark class="todo">【待补：其他分工】</mark></p>
+        <p class="links"><a class="btn" href="https://baixue-wu.github.io/MoCoCo/" target="_blank" rel="noopener">在线试用 ↗</a><a class="btn ghost" href="https://github.com/Baixue-Wu/MoCoCo" target="_blank" rel="noopener">代码 ↗</a></p>
+      </div>
+    </article>
+    <article class="card">
+      <figure class="vis"><img src="assets/cards/cineatlas.svg" alt="世界地图上 8 个目的地依次闪动" loading="lazy"></figure>
+      <div class="body">
+        <p class="kicker">产品原型 · 网页</p>
+        <h3>映游 CineAtlas</h3>
+        <p class="lede">给旅行者的电影文化地图</p>
+        <p>选一个目的地，从电影里看当地人的家庭、日常与时代变化，带着一个问题去旅行。首批收录 8 个目的地、16 部电影。</p>
+        <p class="role"><b>我负责</b><mark class="todo">【待补】</mark></p>
+        <p class="links"><a class="btn ghost" href="https://github.com/Baixue-Wu/CineAtlas" target="_blank" rel="noopener">代码 ↗</a><mark class="todo">【待补：在线地址】</mark></p>
+      </div>
+    </article>
+    <article class="card">
+      <figure class="vis"><img src="assets/cards/inkmuse.svg" alt="一段文字排成图文卡片" loading="lazy"></figure>
+      <div class="body">
+        <p class="kicker">产品原型 · 网页与微信小程序</p>
+        <h3>InkMuse</h3>
+        <p class="lede">把写好的文字，自动排成好看的图文卡片</p>
+        <p>根据文字内容决定配色、版式和配图，可以逐页修改并导出图片，适合发布到图文平台。</p>
+        <p class="role"><b>我负责</b><mark class="todo">【待补】</mark></p>
+        <p class="links"><a class="btn ghost" href="https://github.com/Baixue-Wu/InkMuse" target="_blank" rel="noopener">代码 ↗</a></p>
+      </div>
+    </article>
+    <article class="card">
+      <figure class="vis"><img src="assets/cards/nexthook.svg" alt="按内容系列对比的柱状图与单条内容散点" loading="lazy"><figcaption>示意动画</figcaption></figure>
+      <div class="body">
+        <p class="kicker">产品原型 · 数据分析</p>
+        <h3>NextHook</h3>
+        <p class="lede">创作者的内容数据复盘工具</p>
+        <p>上传自己账号的内容数据表，按内容系列对比播放、收藏和涨粉，看清哪类内容表现更好，再规划下一条要试的内容。基于 Microsoft Data Formulator 改造。</p>
+        <p class="role"><b>我负责</b><mark class="todo">【待补】</mark></p>
+        <p class="links"><a class="btn ghost" href="https://github.com/Baixue-Wu/NextHook" target="_blank" rel="noopener">代码 ↗</a></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="block" id="videos">
+  <header class="block-head">
+    <h2>视频作品</h2>
+    <p class="en">VIDEOS &nbsp;/&nbsp; 4</p>
+    <p class="note">一部代码绘制的古风短片，三支 AI 生成的短片。每个视频下面的色带是它的电影条形码：全片各个时刻的平均色，点一下就跳到那个时刻。</p>
+  </header>
+
+  <article class="film feature">
+    <div class="screen"><video id="v-jimo" preload="none" controls playsinline poster="media/video/jimo.jpg"><source src="media/video/jimo.mp4" type="video/mp4"></video></div>
+    <div class="barcode" data-video="v-jimo" data-barcode="jimo"></div>
+    <div class="meta">
+      <h3 class="kai">寂寞花芳</h3>
+      <p class="kicker">古风短片 · <span data-duration="jimo"></span></p>
+      <p>改编自《周原纪》中班婕妤的故事。画面里的山水、宫殿、人物和衣裳全部由代码绘制，再配上旁白与音乐合成。</p>
+      <p class="links"><a class="btn ghost" href="https://github.com/Baixue-Wu/Lonely-Flower-Fragrance" target="_blank" rel="noopener">制作代码 ↗</a></p>
+    </div>
+  </article>
+
+  <div class="grid three">
+    <article class="film tall">
+      <div class="screen"><video id="v-dog" preload="none" controls playsinline loop poster="media/video/dog.jpg"><source src="media/video/dog.mp4" type="video/mp4"></video></div>
+      <div class="barcode" data-video="v-dog" data-barcode="dog"></div>
+      <h3>晒被子吃西瓜</h3>
+      <p class="kicker">3D 植绒盲盒动画 · <span data-duration="dog"></span></p>
+    </article>
+    <article class="film tall">
+      <div class="screen"><video id="v-ootd" preload="none" controls playsinline loop poster="media/video/ootd.jpg"><source src="media/video/ootd.mp4" type="video/mp4"></video></div>
+      <div class="barcode" data-video="v-ootd" data-barcode="ootd"></div>
+      <h3>秋日穿搭</h3>
+      <p class="kicker">竖屏穿搭短片 · <span data-duration="ootd"></span></p>
+    </article>
+    <article class="film tall">
+      <div class="screen"><video id="v-cyber" preload="none" controls playsinline loop poster="media/video/cyber.jpg"><source src="media/video/cyber.mp4" type="video/mp4"></video></div>
+      <div class="barcode" data-video="v-cyber" data-barcode="cyber"></div>
+      <h3>高空馄饨摊</h3>
+      <p class="kicker">赛博朋克一镜到底 · <span data-duration="cyber"></span></p>
+    </article>
+  </div>
+  <p class="process"><b>三支 AI 短片的做法</b><span>需求</span><span>故事板</span><span>素材清单</span><span>提示词</span><span>生成与修正</span><span class="tools">即梦 · ChatGPT 生图</span></p>
+</section>
+
+<section class="block" id="research">
+  <header class="block-head">
+    <h2>论文与课题</h2>
+    <p class="en">RESEARCH &nbsp;/&nbsp; 3 PAPERS, 1 FUNDED STUDY</p>
+    <p class="note">用数据科学的方法研究电影：色彩、票房、字幕情绪，以及微短剧产业。</p>
+  </header>
+  <div class="grid two">
+    <article class="card paper">
+      <figure class="vis"><img src="assets/cards/color.svg" alt="一帧画面的色相分布环与 K-Means 色板" loading="lazy"></figure>
+      <div class="body">
+        <p class="kicker">第一作者 · 《电影评介》（中文核心）</p>
+        <h3>中日美赛博朋克动画色彩比较研究</h3>
+        <p>用电影条形码、K-Means 聚类和 HSV 色彩模型，比较三国作品在明度、饱和度与色相上的差异，并联系各自的文化观念。</p>
+      </div>
+    </article>
+    <article class="card paper">
+      <figure class="vis"><img src="assets/cards/boxoffice.svg" alt="散点与回归线" loading="lazy"><figcaption>示意动画</figcaption></figure>
+      <div class="body">
+        <p class="kicker">独立作者 · 《喜剧世界》</p>
+        <h3>喜剧电影票房影响因素研究</h3>
+        <p>采集 931 部喜剧电影，构建制作、内容、观众三类变量，回归分析发现导演产出能力与类型融合是票房的显著预测因素。</p>
+      </div>
+    </article>
+    <article class="card paper">
+      <figure class="vis"><img src="assets/cards/jia.svg" alt="六部电影的情绪曲线" loading="lazy"><figcaption>示意动画</figcaption></figure>
+      <div class="body">
+        <p class="kicker">“地缘杯”中国电影青年学者优秀论文奖 三等奖 · 2024</p>
+        <h3>数字人文视角下贾樟柯地缘电影的文化研究</h3>
+        <p>采集 6 部贾樟柯电影的字幕，用 jieba 分词、SnowNLP 情感打分和 LDA 主题模型分析主题与情绪的变化，归纳影片中的地域文化标记。</p>
+      </div>
+    </article>
+    <article class="card paper">
+      <figure class="vis"><img src="assets/cards/microdrama.svg" alt="竖屏短剧剧集在滚动" loading="lazy"></figure>
+      <div class="body">
+        <p class="kicker">西安市社会科学规划基金课题 · 主要参与人 · 2025 年 12 月结项</p>
+        <h3>新质生产力赋能西安“微短剧+”业态创新发展路径研究</h3>
+        <p><mark class="todo">【待补：本人负责的部分】</mark></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="block more" id="contact">
+  <div class="col">
+    <h4>荣誉</h4>
+    <p>第 17 届全国大学生广告艺术大赛 陕西赛区 影视广告类 一等奖（2025，三人合作）</p>
+    <p>第二届“地缘杯”中国电影青年学者优秀论文奖 三等奖（2024）</p>
+  </div>
+  <div class="col">
+    <h4>工具</h4>
+    <p><b>数据</b>Python · pandas · scikit-learn · jieba · SnowNLP · LDA</p>
+    <p><b>AI</b>即梦 · ChatGPT 生图 <mark class="todo">【待补：常用 AI 工具与 Agent】</mark></p>
+    <p><b>内容</b><mark class="todo">【待补：剪辑、设计工具】</mark></p>
+  </div>
+  <div class="col">
+    <h4>联系</h4>
+    <p class="mail">baixuewu0@gmail.com</p>
+    <p><a href="https://github.com/Baixue-Wu" target="_blank" rel="noopener">github.com/Baixue-Wu ↗</a></p>
+    <p><mark class="todo">【待补：意向城市、其他社交主页】</mark></p>
+  </div>
+</section>
+
+<footer class="foot">
+  <img src="assets/cards/palettes.svg" alt="本页 21 帧画面的色板" loading="lazy">
+  <p>© 2026 Baixue Wu</p>
+</footer>
+
+</main>
+<script src="js/hero.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

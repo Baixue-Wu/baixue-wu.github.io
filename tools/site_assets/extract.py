@@ -1,9 +1,10 @@
-"""Extract frames, colour palettes and film barcodes from Baixue's works.
+"""Extract frames, palettes, film barcodes and web videos from Baixue's works.
 
 Reads a manifest (media/sources.json), pulls the listed frames and stills out
-of the source videos and images, and writes small JPEGs plus one
-media/media.json that records every frame's palette and every film's barcode.
-The renderer reads only media/, never the source videos.
+of the source videos and images, transcodes the listed videos for the web, and
+writes one media/media.json that records every frame's palette, every film's
+barcode and every video's file, poster and duration. The site and the renderer
+read only media/, never the source files.
 """
 
 import argparse
@@ -67,16 +68,28 @@ def palette(img: Image.Image, k: int) -> list[dict]:
 
 def barcode(ffmpeg: str, video: Path, slices: int) -> list[str]:
     """Mean colour of evenly spaced moments across the whole film."""
-    probe = subprocess.run([ffmpeg, "-i", str(video)], capture_output=True).stderr.decode()
-    hms = probe.split("Duration: ")[1].split(",")[0].split(":")
-    duration = int(hms[0]) * 3600 + int(hms[1]) * 60 + float(hms[2])
     cmd = [ffmpeg, "-loglevel", "error", "-i", str(video), "-vf",
-           f"fps={slices / duration},scale=16:9:flags=area", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"]
+           f"fps={slices / duration(ffmpeg, video)},scale=16:9:flags=area", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"]
     run = subprocess.run(cmd, capture_output=True)
     if run.returncode != 0:
         raise RuntimeError(f"ffmpeg failed on {video}:\n{run.stderr.decode()}")
     frames = np.frombuffer(run.stdout, dtype=np.uint8).reshape(-1, 9 * 16, 3).mean(1)
     return ["#%02x%02x%02x" % tuple(int(v) for v in f) for f in frames[:slices]]
+
+
+def duration(ffmpeg: str, video: Path) -> float:
+    probe = subprocess.run([ffmpeg, "-i", str(video)], capture_output=True).stderr.decode()
+    hms = probe.split("Duration: ")[1].split(",")[0].split(":")
+    return int(hms[0]) * 3600 + int(hms[1]) * 60 + float(hms[2])
+
+
+def transcode(ffmpeg: str, video: Path, out: Path, height: int, crf: int) -> None:
+    cmd = [ffmpeg, "-loglevel", "error", "-y", "-i", str(video), "-vf", f"scale=-2:{height}",
+           "-c:v", "libx264", "-preset", "slow", "-crf", str(crf), "-pix_fmt", "yuv420p",
+           "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart", str(out)]
+    run = subprocess.run(cmd, capture_output=True)
+    if run.returncode != 0:
+        raise RuntimeError(f"ffmpeg failed to transcode {video}:\n{run.stderr.decode()}")
 
 
 def main() -> None:
@@ -87,12 +100,14 @@ def main() -> None:
     ap.add_argument("--out", type=Path, default=Path("media"), help="output folder (default: media)")
     ap.add_argument("--k", type=int, default=5, help="palette size per frame (default: 5)")
     ap.add_argument("--frame-width", type=int, default=240, help="default frame width in px (default: 240)")
+    ap.add_argument("--skip-videos", action="store_true", help="keep already transcoded videos")
     ap.add_argument("--ffmpeg", default=imageio_ffmpeg.get_ffmpeg_exe(), help="ffmpeg executable")
     args = ap.parse_args()
 
     spec = json.loads(args.manifest.read_text())
     (args.out / "frames").mkdir(parents=True, exist_ok=True)
-    result = {"frames": {}, "barcodes": {}, "stills": {}}
+    result = {"works": spec.get("works", {}), "frames": {}, "barcodes": {}, "stills": {}, "videos": {}}
+    (args.out / "video").mkdir(parents=True, exist_ok=True)
 
     for f in spec["frames"]:
         img = crop(grab(args.ffmpeg, resolve(args.root, f["video"]), f["t"]), f["aspect"], f["focus"])
@@ -116,6 +131,20 @@ def main() -> None:
         img.save(args.out / name, quality=80, optimize=True, progressive=True)
         result["stills"][s["id"]] = {"file": name, "size": list(img.size)}
         print("still", s["id"])
+
+    for v in spec.get("videos", []):
+        src = resolve(args.root, v["video"])
+        name, poster = f"video/{v['id']}.mp4", f"video/{v['id']}.jpg"
+        if args.skip_videos and (args.out / name).exists():
+            print("video", v["id"], "(kept)")
+        else:
+            transcode(args.ffmpeg, src, args.out / name, v["height"], v["crf"])
+            print("video", v["id"])
+        img = grab(args.ffmpeg, src, v["poster_t"])
+        img = img.resize((round(img.width * v["height"] / img.height), v["height"]), Image.LANCZOS)
+        img.save(args.out / poster, quality=80, optimize=True, progressive=True)
+        result["videos"][v["id"]] = {"file": name, "poster": poster, "size": list(img.size),
+                                     "duration": round(duration(args.ffmpeg, src), 2)}
 
     (args.out / "media.json").write_text(json.dumps(result, ensure_ascii=False, indent=1))
 

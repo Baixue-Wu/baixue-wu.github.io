@@ -12,3 +12,4 @@
 
 - Project contribution descriptions cover product direction, requirements, interaction design and prototype iteration, as confirmed by the user on 2026-10-09. Name the concrete workflow for each project. Omit tool usage from these descriptions at the user's request.
 - All project website links use the label 网址, as requested by the user on 2026-10-09, for consistent navigation beside the code links.
+- The portfolio presents InkMuse as a web prototype, including its platform label and contribution description, at the user's request on 2026-10-09.

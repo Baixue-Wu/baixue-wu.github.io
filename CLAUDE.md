@@ -22,3 +22,7 @@ Positioning 以算法与数据测量内容，以视听与审美理解用户 live
 - Author and commit as Baixue Wu <baixuewu0@gmail.com> via the `github-baixue` SSH alias. No assistant attribution. Comments and docstrings avoid em dashes.
 
 Design decisions: `design-decisions.md`.
+
+## Public project demos
+
+`InkMuse/`, `CineAtlas/`, `NextHook/` are generated static builds copied with `tools/site-demos.py --help`. Rebuild in their source repositories; do not hand-edit compiled files. Manifests identify the source revision and artifact hashes. InkMuse exposes samples, editing, local uploads and export; NextHook exposes review and manual exploration with query-string navigation; AI service operations are omitted from these public builds. `.nojekyll` preserves generated assets on GitHub Pages.

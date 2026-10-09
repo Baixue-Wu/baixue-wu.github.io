@@ -91,6 +91,7 @@ p { margin: 0; }
 .grid { display: grid; gap: 24px; }
 .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid.papers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 .card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; min-width: 0;
   transition: border-color .3s, transform .3s; }
@@ -102,6 +103,8 @@ p { margin: 0; }
 @keyframes scan { 0% { left: -4px; opacity: 1; } 90% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
 .vis figcaption { position: absolute; right: 12px; bottom: 10px; font: 10px var(--mono); letter-spacing: .12em; color: var(--dim); }
 .body { padding: 22px 26px 26px; display: grid; gap: 10px; align-content: start; }
+#projects .body { display: flex; flex-direction: column; flex: 1; }
+#projects .links { margin-top: auto; padding-top: 6px; }
 .kicker { font-size: 13px; color: var(--muted); letter-spacing: .04em; }
 .card h3, .film h3 { margin: 0; font-family: var(--serif); font-size: 26px; line-height: 1.35; letter-spacing: .04em; text-wrap: balance; }
 .paper h3 { font-size: 21px; }
@@ -149,7 +152,7 @@ p { margin: 0; }
 .foot p { font: 11px var(--mono); letter-spacing: .16em; color: var(--dim); text-align: center; }
 
 @media (max-width: 860px) {
-  .grid.two, .more { grid-template-columns: minmax(0, 1fr); }
+  .grid.two, .grid.papers, .more { grid-template-columns: minmax(0, 1fr); }
   .feature { grid-template-columns: minmax(0, 1fr); }
   .feature .meta { grid-column: 1; grid-row: auto; }
   .facts, .hero-foot .hint { display: none; }

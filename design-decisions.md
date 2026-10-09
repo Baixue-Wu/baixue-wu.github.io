@@ -13,3 +13,5 @@
 - Project contribution descriptions cover product direction, requirements, interaction design and prototype iteration, as confirmed by the user on 2026-10-09. Name the concrete workflow for each project. Omit tool usage from these descriptions at the user's request.
 - All project website links use the label 网址, as requested by the user on 2026-10-09, for consistent navigation beside the code links.
 - The portfolio presents InkMuse as a web prototype, including its platform label and contribution description, at the user's request on 2026-10-09.
+- Project cards anchor their website and code links to the bottom so cards in the same row remain aligned as copy lengths change. The user requested aligned InkMuse and NextHook links on 2026-10-09.
+- The three papers form one equal-width desktop row and stack on narrower screens, removing the unused fourth position in the former two-column layout, as requested on 2026-10-09.

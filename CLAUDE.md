@@ -2,7 +2,7 @@
 
 Baixue Wu's personal website (GitHub Pages, repo `Baixue-Wu/baixue-wu.github.io`). It targets recruiters for AI product / AI content operations roles in China.
 
-Positioning 以算法与数据测量内容，以视听与审美理解用户 lives in form only: light, colour and motion (data in cyan, film in amber, the scanner in the hero). Content is grouped by type in plain language a recruiter understands: 项目, 视频作品, 论文与课题, then honours, tools, contact.
+Positioning 以算法与数据测量内容，以视听与审美理解用户 lives in form only: light, colour and motion (data in cyan, film in amber, the scanner in the hero). Content is grouped by type in plain language a recruiter understands: 项目, 视频作品, 论文, then honours, skills, contact.
 
 ## Structure
 

@@ -1,0 +1,6 @@
+{
+  "demo": true,
+  "version": "0.1.0",
+  "coreSha256": "c785e8e4ee61dbd328befc8c1d87c5c79b961320d150c24f2c1f9922c6dfe78e",
+  "apiBase": "http://127.0.0.1:8791"
+}

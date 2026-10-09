@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/Baixue-Wu/InkMuse",
+  "revision": "40b9fad8e08b581c1077e0914a79522bb0e72487",
+  "mode": "public-static-demo",
+  "files": {
+    "app.js": "06ee6322ef18e1a9f03893d8c35c2ae3a2c26dff5e37f194339dcd4319bd42b3",
+    "build.json": "416d4e20c20ddb6d18606936aee4e971ec66f587d2d696bf58718ba39fd9672f",
+    "core/design.js": "c785e8e4ee61dbd328befc8c1d87c5c79b961320d150c24f2c1f9922c6dfe78e",
+    "icon.svg": "bb9dbc49b5ea885770f6709733755b0f3e2a95a1c07cafa8cd8a2b0760b1d716",
+    "index.html": "43519adec67a12ba4894c7b68abf1d5a9d6d7177dcd916037eb735ec683e3167",
+    "runtime.js": "b29ad88552f673707542358bb3b012fae531587e7f7635c0737a9a517a94b6bd",
+    "style.css": "72dffda69489e3d8209550d62132e84bb5dd72e41921a6050cbb587aa3317b71",
+    "vendor/jszip.min.js": "7f839b2d4688b845c105ebf5d2f9803075f91ea0fe72bdaac176c3a04dd3d2c1"
+  }
+}

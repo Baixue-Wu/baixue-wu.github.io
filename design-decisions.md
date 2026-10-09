@@ -7,3 +7,5 @@
 - Dark projection-room look with film grain, a projector light cone and flicker; data elements in cyan, film elements in amber.
 - Self-hosted subset fonts and no CDN, for access from mainland China.
 - UCL status is written Visitor (研究访问), as on her UCL ID card.
+
+- Host the three project demos under the existing portfolio GitHub Pages site, with separate demo and source links. Ship only built static assets and licenses, plus source revision and file hashes; no backend, private configuration or runtime data.

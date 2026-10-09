@@ -1,0 +1,20 @@
+{
+  "repository": "https://github.com/Baixue-Wu/CineAtlas",
+  "revision": "e9dd727cbee1178a28bbd289a35a012e49177b5a",
+  "mode": "public-static-demo",
+  "files": {
+    "LICENSE-upstream.txt": "3ba97d359197bd0cd97364a62265594db3a906b24b3c71e68231b959989ebdb9",
+    "LICENSE.txt": "2487c551fd3c4aa312fcac005f6c701fd900094d1bee5d608b50dca516029c6a",
+    "THIRD_PARTY_NOTICES.txt": "1904a6742bb6fed85e6f10cea7d2ad6db9618a7c8325efab86316f2cad576389",
+    "assets/MapView-CIGW-MKW.css": "fcd9fbeec3e87013f776847f0e76395d4d7eba07d982964933a41bd07503e6fe",
+    "assets/MapView-CdJpmVX3.js": "7092a6c73f497ed06d4464765061193b26df51e77ca98b2226adbaac3191692a",
+    "assets/index-Cr0eQs-h.js": "d9976985ebbfef89c05fa1e8ccd824afcf2eaff9dcb67f1942ef090577aa6b3d",
+    "assets/index-DGG8faiq.css": "0cd23fcc99a5df36539b0ea1293c9e527bec525c3a308d619e2fbf93c913074a",
+    "favicon.svg": "c4200f95a80961ecf818a83a2bb03ba5a14885b3a0da5b4df09a5aa7fbd64539",
+    "images/hong-kong.jpg": "a69e95e9967d1f91242c4ae6640bfde1b7ce9e8c593385a2a3ba5b4372afcc7c",
+    "images/paris.jpg": "1f650992baccdfce3563cbb31acdb0acf0947c68e5f9161f7ed0e874315ba5ef",
+    "images/tokyo.jpg": "dcd66c5271d6d7dfa8fec2745d643ded7de2a55cce8930d09cc02dc226499069",
+    "index.html": "cc8d9f87d1f7e48ad61968ca4dd1bbcbc949375bcced1f5ffc78ad68f285c2eb",
+    "land.geojson": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9"
+  }
+}

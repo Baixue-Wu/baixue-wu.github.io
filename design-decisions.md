@@ -9,3 +9,6 @@
 - UCL status is written Visitor (研究访问), as on her UCL ID card.
 
 - Host the three project demos under the existing portfolio GitHub Pages site, with separate demo and source links. Ship only built static assets and licenses, plus source revision and file hashes; no backend, private configuration or runtime data.
+
+- Project contribution descriptions cover product direction, requirements, interaction design and prototype iteration, as confirmed by the user on 2026-10-09. Name the concrete workflow for each project. Omit tool usage from these descriptions at the user's request.
+- All project website links use the label 网址, as requested by the user on 2026-10-09, for consistent navigation beside the code links.

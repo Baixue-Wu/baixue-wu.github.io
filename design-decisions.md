@@ -16,3 +16,5 @@
 - Project cards anchor their website and code links to the bottom so cards in the same row remain aligned as copy lengths change. The user requested aligned InkMuse and NextHook links on 2026-10-09.
 - The three papers form one equal-width desktop row and stack on narrower screens, removing the unused fourth position in the former two-column layout, as requested on 2026-10-09.
 - Honors, skills and contact use larger headings in the site's existing serif family and share desktop content rows so their entries align. On narrower screens each column stacks independently, as requested on 2026-10-09.
+
+- 2026-10-10：教育介绍按学校上下两行显示，两行统一使用正文无衬线字体、16px 字号与相同行距，保持居中和明确的学历层次。

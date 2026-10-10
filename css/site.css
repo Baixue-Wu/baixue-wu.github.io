@@ -76,7 +76,8 @@ p { margin: 0; }
 #tc { font-variant-numeric: tabular-nums; color: var(--ink-2); }
 
 /* intro */
-.intro { padding: 56px var(--gutter) 24px; display: grid; gap: 6px; justify-items: center; text-align: center; color: var(--ink-2); font-size: 16.5px; }
+.intro { padding: 56px var(--gutter) 24px; display: grid; gap: 8px; justify-items: center; text-align: center; color: var(--ink-2); font: 400 16px/1.75 var(--sans); }
+.intro p { margin: 0; font: inherit; }
 .intro .sep { color: var(--dim); margin-inline: 10px; }
 .intro .want { margin-top: 10px; color: var(--ink); font-size: 18px; }
 
